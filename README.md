@@ -1,1 +1,1 @@
-# Leave-Management-System
+The Leave Management project is designed to facilitate the efficient management of employee leave requests within an organization. It provides a centralized system for employees to request leaves, allows managers to review and approve/reject those requests, and maintains comprehensive records of employees' leave history.# Leave-Management-System
