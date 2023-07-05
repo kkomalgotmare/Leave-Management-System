@@ -13,6 +13,8 @@ This Project is based on following concepts:
 8. Lightning Datable with row level action
 9. SLDS
 10. ChartJs (doughnut charts)
-11. Wire function
-12. refreshApex
-13. SOQL
+11. Lightning Layout
+12. Spinner
+13. Wire function
+14. refreshApex
+15. SOQL
