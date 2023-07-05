@@ -1,0 +1,13 @@
+<template>
+    <lightning-card>
+        <div class="slds-var-m-around_medium">
+            <lightning-record-form 
+                record-id={rowidtopass}
+                object-api-name={leave_req_obj} 
+                fields={myfields} 
+                onsubmit={handleSuccess}
+                columns="1">
+            </lightning-record-form>
+        </div>
+    </lightning-card>
+</template>
