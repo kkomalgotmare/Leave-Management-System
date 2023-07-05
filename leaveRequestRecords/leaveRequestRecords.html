@@ -1,0 +1,42 @@
+<template>
+    <lightning-card>        
+        <!-- Spinner -->
+        <div if:true={isLoading} style="height: 200px; position:relative">
+            <lightning-spinner variant="base" size="medium"></lightning-spinner>
+        </div>
+
+        <div class="slds-var-m-around_medium" style="margin-left:20px; margin-right:15px; border: 1px solid black;">
+            <template if:true={shouldDisplayLeaveRecords}>
+                <lightning-datatable data={leaveReqToDisplay} 
+                                    columns={columns} 
+                                    key-field="Id"
+                                    hide-checkbox-column
+                                    onrowaction={navigateToEditRecordPage}>
+                </lightning-datatable>
+            </template>
+            <template if:true={shouldOpenEditForm}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box LWC header here -->
+                        <header class="slds-modal__header">
+                            <button
+                                class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeModal}>
+                                <lightning-icon class="close-button" icon-name="utility:close"
+                                    alternative-text="close" variant="brand-text-link"
+                                    size="small"></lightning-icon>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Leave
+                                Request</h2>
+                        </header>
+                        <!-- Modal/Popup Box LWC body starts here -->
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <c-leave-request-create-form rowidtopass = {rowidtopass} myfields = {myFields}></c-leave-request-create-form>
+                        </div>
+                    </div>
+                </section>
+            </template>
+        </div>
+    </lightning-card>
+</template>

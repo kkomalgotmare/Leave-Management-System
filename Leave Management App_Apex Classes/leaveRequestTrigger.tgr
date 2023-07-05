@@ -1,0 +1,18 @@
+trigger leaveRequestTrigger on Leave_Request__c (before Insert, before Update, after Update, After Insert) {
+    if(Trigger.isBefore){
+        if(Trigger.isInsert){
+            leaveRequestTriggerHandler.autoPopulateUserFiled(Trigger.new);
+        }if(Trigger.isUpdate){
+            leaveRequestTriggerHandler.autoPopulateUserFiled(Trigger.new);
+        }
+    }
+    
+    if(Trigger.isAfter){
+        if(Trigger.isUpdate){
+            leaveRequestTriggerHandler.updateConsumedLeaveFieldOfUserLeavesObject(Trigger.new);
+        }
+        if(Trigger.isInsert){
+            leaveRequestTriggerHandler.SendEmailToMgr(Trigger.new);
+        }
+    }
+}

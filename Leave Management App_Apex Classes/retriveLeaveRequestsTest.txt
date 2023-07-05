@@ -1,0 +1,93 @@
+@isTest
+public class retriveLeaveRequestsTest {
+    
+    @testSetup public static void testSetup(){
+        Profile profile1 = [SELECT Id FROM Profile WHERE Name='Standard User'];
+        
+        User user1 = new User(Alias = 'nusert', Email='test1@gmail.com',
+                              EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
+                              LocaleSidKey='en_US', ProfileId = profile1.Id,
+                              TimeZoneSidKey='America/Los_Angeles',
+                              UserName= 'New2User@testing.com');
+        
+        System.runAs(user1) {
+            // Create a user
+            /*Profile userProfile = [SELECT Id, Name FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
+            User originalUser = new User(
+                FirstName = 'John',
+                LastName = 'Doe',
+                Email = 'johndoe@example.com',
+                Username = 'johndoe@example.com',
+                Alias = 'johndoe',
+                TimeZoneSidKey = 'America/New_York',
+                LocaleSidKey = 'en_US',
+                EmailEncodingKey = 'UTF-8',
+                ProfileId = userProfile.Id,
+                LanguageLocaleKey = 'en_US'
+            );
+            insert originalUser;
+            
+            // Clone the original user
+            User clonedUser = originalUser.clone(false, false, false, false);
+            clonedUser.FirstName = 'Jane';
+            clonedUser.LastName = 'Smith';
+            // Change the profile for the cloned user
+            Profile newProfile = [SELECT Id, Name FROM Profile WHERE Name = 'Salesforce Developer' LIMIT 1];
+            clonedUser.ProfileId = newProfile.Id;
+            insert clonedUser;        */
+            
+            
+            //Create Leave Reuest
+            List<Leave_Request__c> leaveList = new List<Leave_Request__c>();
+            
+            for(integer i=4; i<10;i++){
+                Leave_Request__c levaveRequests =  new Leave_Request__c();
+                
+                levaveRequests.Leave_Type__c = 'Sick Leave';
+                levaveRequests.From_Date__c = System.today()+i;
+                levaveRequests.To_Date__c = System.today()+i+1;
+                levaveRequests.Reason__c = 'Feeling Sick';
+                levaveRequests.OwnerId = UserInfo.getUserID();
+                //levaveRequests.OwnerId = originalUser.id;
+                
+                leaveList.add(levaveRequests);
+            }  
+            
+            insert leaveList;
+            System.debug('leaveList=='+leaveList);
+        }
+        
+    }
+    
+    
+    @isTest 
+    public static void retriveLeaveRequestsTestMethod(){        
+        
+        Test.startTest();
+        List<Leave_Request__c> returnList = retriveLeaveRequests.retriveLeaveRequests('System Administrator','myLeaveStatusTabSet');
+     
+        retriveLeaveRequests.retriveLeaveRequests('Salesforce Developer','myLeaveStatusTabSet');       
+        Test.stopTest();       
+    }
+    
+    @isTest 
+    public static void retriveDataForSickLeaveTestMethod(){
+        Test.startTest();
+        retriveLeaveRequests.retriveDataForSickLeave();
+        Test.stopTest();
+    }
+    
+    @isTest 
+    public static void retriveDataForPlannedLeaveTestMethod(){
+        Test.startTest();
+        retriveLeaveRequests.retriveDataForPlannedLeave();
+        Test.stopTest();
+    }
+    
+    @isTest 
+    public static void retriveDataForUnpaidLeaveTestMethod(){
+        Test.startTest();
+        retriveLeaveRequests.retriveDataForUnpaidLeave(); 
+        Test.stopTest();
+    }
+}

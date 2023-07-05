@@ -1,0 +1,39 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item padding="around-small" size="4">
+            <div class="custom-box slds-box slds-p-around_medium">
+                <lightning-card title="Sick Leave" icon-name="utility:chart">
+                    <div class="slds-var-m-around_medium">
+                        <canvas class="SickLeaveDonut" lwc:dom="manual" width="250" height="250"></canvas>
+                    </div>
+                    <div class='chart-caption slds-align_absolute-center'>Total Allocated: {Sick_Total_Allocated__c}
+                    </div>
+                </lightning-card>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="4">
+            <div class="custom-box slds-box slds-p-around_medium">
+                <lightning-card title="Planned Leave" icon-name="utility:chart">
+                    <div class="slds-var-m-around_medium">
+                        <canvas class="PlannedLeaveDonut" lwc:dom="manual" width="250" height="250"></canvas>
+                    </div>
+                    <div class='chart-caption slds-align_absolute-center'>Total Allocated: {Planned_Total_Allocated__c}
+                    </div>
+                </lightning-card>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="4">
+            <div class="custom-box slds-box slds-p-around_medium">
+                <lightning-card title="Unpaid Leave" icon-name="utility:chart">
+                    <div class="slds-var-m-around_medium">
+                        <canvas class="UnpaidLeaveDonut" lwc:dom="manual" width="250" height="250"></canvas>
+                    </div>
+                    <div class='chart-caption slds-align_absolute-center'>Total Allocated: {Sick_Total_Allocated__c}
+                    </div>
+                </lightning-card>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
